@@ -153,9 +153,9 @@ export default function HomePage() {
               </p>
               <ul className="space-y-4 pt-4">
                 {[
+                  { label: "Perfect Fusion", desc: "Seamless blend of React UIs with Razor Pages & .NET APIs" },
                   { label: "Type-Safe End-to-End", desc: "Shared DTOs between C# and TypeScript." },
-                  { label: "AI-Friendly", desc: "Clean, declarative code that LLMs understand perfectly." },
-                  { label: "Production Ready", desc: "Docker, Auth, and AutoQuery out of the box." }
+                  { label: "AI-Friendly", desc: "Optimal React UIs, Zero ambiguity APIs. Maximum AI accuracy." },
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-green-500/10 flex items-center justify-center text-green-600">
@@ -173,12 +173,12 @@ export default function HomePage() {
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
               <div className="relative rounded-xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900 p-8 text-center transform transition-transform duration-500 hover:rotate-y-12 hover:rotate-x-12">
                 <div className="flex items-center justify-center gap-8 mb-6">
-                  <div className="w-20 h-20 rounded-2xl bg-[#512BD4] flex items-center justify-center shadow-lg ring-1 ring-white/10">
-                    <span className="text-white font-bold text-2xl">.NET</span>
-                  </div>
-                  <div className="w-1 h-12 bg-slate-700 rounded-full" />
                   <div className="w-20 h-20 rounded-full bg-[#282c34] flex items-center justify-center shadow-lg ring-1 ring-white/10">
                     <span className="text-[#61DAFB] font-bold text-xl">React</span>
+                  </div>
+                  <div className="w-1 h-12 bg-slate-700 rounded-full" />
+                  <div className="size-18 rounded-2xl bg-[#512BD4] flex items-center justify-center shadow-lg ring-1 ring-white/10">
+                    <span className="px-4 text-white font-bold text-2xl">.NET</span>
                   </div>
                 </div>
                 <p className="text-2xl font-mono font-bold text-white">Seamlessly Integrated</p>
@@ -261,7 +261,7 @@ function TemplateSection({ title, description, href, screenshot, diagram, featur
         </Link>
         <p className="text-lg text-muted-foreground leading-relaxed">{description}</p>
 
-        <div className="bg-[#f9f9fb] border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-[#f9f9fb] dark:bg-[#1a1a1a] border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between mb-4">
             <h4 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>

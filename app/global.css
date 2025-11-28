@@ -1,3 +1,26 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+
+/* React.dev-style dark mode background */
+.dark {
+    --background: 22 26 29;
+    /* #16181d in RGB */
+}
+
+/* React.dev-style gradient backgrounds */
+.bg-gradient-right {
+    background-image: conic-gradient(from -90deg at 110% 100%, #fff 0deg, #ebecf0 90deg, #ebecf0 1turn);
+}
+
+.dark .dark\:bg-gradient-right-dark {
+    background-image: conic-gradient(from -90deg at 110% 100%, #2b303b 0deg, #16181d 90deg, #16181d 1turn);
+}
+
+.border-primary\/5 {
+    border-color: rgba(35, 39, 47, 0.05);
+}
+
+.dark .dark\:border-primary-dark\/5 {
+    border-color: rgba(246, 247, 249, 0.05);
+}
