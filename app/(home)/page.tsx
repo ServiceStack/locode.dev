@@ -11,26 +11,40 @@ export default function HomePage() {
   return (
     <main className="flex flex-col min-h-[calc(100vh-4rem)]">
 
+
+
       {/* Hero Section - Dark Theme */}
-      <section className="relative w-full bg-[#0f172a] text-white overflow-hidden">
-        {/* Dynamic Background */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-sky-900/20 to-slate-900/20" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-cyan-500/10 rounded-full blur-[100px]" />
+      <section className="relative w-full bg-slate-950 border-b border-white/10 overflow-hidden">
+
+        {/* 1. Full Width Background Effects */}
+
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <svg className="h-full w-full" aria-hidden="true">
+            <defs>
+              <pattern id="hero-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M0 40L40 0H20L0 20M40 40V20L20 40" stroke="#0ea5e9" strokeWidth="1" fill="none" opacity="0.1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#hero-grid)" />
+          </svg>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 py-20 md:py-32 relative z-10 text-center">
+        {/* Ambient Glows */}
+        <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-blue-600/20 blur-[100px] pointer-events-none"></div>
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none"></div>
 
-          {/* React Atom Animation Effect */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 opacity-40 pointer-events-none">
-            <div className="w-[600px] h-[600px] border border-cyan-400/20 rounded-full animate-[spin_10s_linear_infinite]" />
-            <div className="absolute top-0 left-0 w-[600px] h-[600px] border border-cyan-400/20 rounded-full animate-[spin_15s_linear_infinite_reverse] rotate-45" />
-            <div className="absolute top-0 left-0 w-[600px] h-[600px] border border-cyan-400/20 rounded-full animate-[spin_20s_linear_infinite] -rotate-45" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-cyan-400/20 rounded-full blur-md animate-pulse" />
-          </div>
+        {/* Spinning React Logo Watermark (Positioned absolutely to the right) */}
+        <svg className="absolute -right-20 top-20 h-[600px] w-[600px] text-cyan-500/5 animate-[spin_60s_linear_infinite] pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
+          <circle cx="12" cy="12" r="2"></circle>
+          <ellipse rx="10" ry="4.5" transform="rotate(60 12 12)"></ellipse>
+          <ellipse rx="10" ry="4.5" transform="rotate(120 12 12)"></ellipse>
+          <ellipse rx="10" ry="4.5"></ellipse>
+        </svg>
 
-          <div className="space-y-6">
+        {/* 2. Main Content Container */}
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:py-32">
+          <div className="text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-sm font-medium text-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.2)] animate-fade-in-up">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -71,6 +85,55 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* 3. Feature Grid / Footer (Full Width Strip) */}
+        <div className="relative border-t border-white/5 bg-white/[0.02] backdrop-blur-sm">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <dl className="grid grid-cols-1 gap-y-8 py-10 sm:grid-cols-3 sm:gap-x-8 lg:gap-x-12">
+
+              {/* Feature 1 */}
+              <div className="relative pl-14">
+                <dt className="text-base font-semibold leading-7 text-white">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+                    <span className="text-cyan-400 font-mono text-xs font-bold">01</span>
+                  </div>
+                  AI Ready
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-slate-400">
+                  Start from well-known React templates tuned for rich, data-driven and AI-generated user interfaces.
+                </dd>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="relative pl-14">
+                <dt className="text-base font-semibold leading-7 text-white">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+                    <span className="text-cyan-400 font-mono text-xs font-bold">02</span>
+                  </div>
+                  End-to-end Type Safety
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-slate-400">
+                  From C# DTOs in .NET to TypeScript DTOs in React for confident refactors without context switching.
+                </dd>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="relative pl-14">
+                <dt className="text-base font-semibold leading-7 text-white">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10 border border-cyan-500/20">
+                    <span className="text-cyan-400 font-mono text-xs font-bold">03</span>
+                  </div>
+                  Zero-Ambiguity APIs
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-slate-400">
+                  Consistent API integrations eliminates guesswork, giving AI the perfect context to generate accurate implementations.
+                </dd>
+              </div>
+
+            </dl>
+          </div>
+        </div>
+
       </section>
 
       {/* Body Content - Light/Default Theme */}
