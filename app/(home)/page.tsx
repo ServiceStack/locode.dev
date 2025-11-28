@@ -62,9 +62,9 @@ export default function HomePage() {
             </h1>
 
             <p className="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-medium">
-              These React + .NET Templates are ideal for <span className="text-cyan-400 font-bold">Vibe Coded UIs</span>
+              Ultimate .NET React Templates for <span className="text-cyan-400 font-bold">Vibe Coded UIs</span>
               <br className="hidden md:block" />
-              and <span className="text-sky-400 font-bold">fast and scalable .NET backends</span>.
+              running on <span className="text-sky-400 font-bold">robust and scalable .NET backends</span>.
             </p>
 
             <div className="flex flex-wrap justify-center gap-6 pt-8">
@@ -241,9 +241,63 @@ export default function HomePage() {
               setDiagramMode={setDiagramMode}
             />
           </div>
+          <PricingCallout />
         </div>
       </div>
     </main>
+  );
+}
+
+function PricingCallout() {
+  return (
+    <div className="relative max-w-4xl mx-auto mt-60 rounded-3xl overflow-hidden bg-slate-950 border border-white/10 shadow-2xl">
+      {/* Background Effects */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <svg className="h-full w-full" aria-hidden="true">
+          <defs>
+            <pattern id="pricing-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M0 40L40 0H20L0 20M40 40V20L20 40" stroke="#0ea5e9" strokeWidth="1" fill="none" opacity="0.1" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#pricing-grid)" />
+        </svg>
+      </div>
+
+      <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-blue-600/20 blur-[80px] pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-cyan-500/10 blur-[80px] pointer-events-none"></div>
+
+      <div className="relative z-10 p-10 text-center">
+        <h3 className="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight">
+          Simple, Transparent Pricing
+        </h3>
+
+        <div className="py-12">
+          <Link
+            href="https://servicestack.net/pricing"
+            className="inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-slate-900 transition-all duration-200 bg-cyan-400 rounded-full hover:bg-cyan-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400"
+          >
+            View Perpetual Pricing
+            <svg className="w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+          </Link>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center max-w-3xl mx-auto">
+          <Link href="https://servicestack.net/free" className="group flex-1 space-y-2 p-4 rounded-xl hover:bg-white/5 transition-colors">
+            <div className="text-xl font-medium text-slate-400 group-hover:text-cyan-400 transition-colors">Individuals & OSS</div>
+            <div className="text-4xl font-bold text-white tracking-tight">Free</div>
+            <p className="text-sm text-slate-500 group-hover:text-slate-300 transition-colors">Forever free for personal & open source</p>
+          </Link>
+
+          <div className="hidden md:block w-px h-16 bg-gradient-to-b from-transparent via-slate-700 to-transparent" />
+
+          <Link href="https://servicestack.net/trial" className="group flex-1 space-y-2 p-4 rounded-xl hover:bg-white/5 transition-colors">
+            <div className="text-xl font-medium text-slate-400 group-hover:text-cyan-400 transition-colors">Commercial</div>
+            <div className="text-4xl font-bold text-white tracking-tight">30 Day</div>
+            <p className="text-sm text-slate-500 group-hover:text-slate-300 transition-colors">Risk-free trial for businesses</p>
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
 
