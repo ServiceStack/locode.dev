@@ -1,0 +1,55 @@
+---
+title: Minimal Templates
+description: Common features for all templates
+---
+
+## Core Technologies
+
+### Frontend (Next.js 16 + React 19)
+- **Next.js** with static export capability
+- **Tailwind CSS 4.x** - Utility-first styling with PostCSS
+- **TypeScript** - Type-safe development
+- **Vitest** - Modern testing framework
+- **ServiceStack React Components** - Pre-built UI components
+
+### .NET Frontend (Integrated + Optional)
+- **Razor Pages** - For Identity Auth UI (`/Identity` routes)
+
+### Backend (.NET 10.0)
+- **ServiceStack 10.x** - High-performance web services framework
+- **ASP.NET Core Identity** - Complete authentication & authorization system
+- **Entity Framework Core** - For Identity data management
+- **OrmLite** - ServiceStack's fast, lightweight Typed ORM for application data
+- **SQLite** - Default database (easily upgradable to PostgreSQL/SQL Server/MySQL)
+
+## Major Features
+
+### Authentication & Authorization
+- ASP.NET Core Identity integration with role-based access control
+- Custom user sessions with additional claims
+- Admin users feature for user management at `/admin-ui/users`
+- Email confirmation workflow (configurable SMTP)
+- Razor Pages for Identity UI (`/Identity` routes)
+- Credentials-based authentication
+
+### AutoQuery CRUD
+- Declarative API development with minimal code
+- Complete Auth-protected CRUD operations (see Bookings example at `/bookings-auto`)
+- Automatic audit trails (created/modified/deleted tracking)
+- Built-in validation and authorization
+- Type-safe TypeScript DTOs auto-generated from C# models
+
+### Background Jobs
+- `BackgroundsJobFeature` for async task processing
+- Command pattern for job execution
+- Email sending via background jobs
+- Recurring job scheduling support
+- Upgradable to `DatabaseJobsFeature` for enterprise RDBMS
+
+### Developer Experience
+- **Admin UI** at `/admin-ui` for App management
+- **Health checks** at `/up` endpoint
+- **Modular startup** configuration pattern
+- **Code-first migrations** with OrmLite
+- **Docker support** with container publishing
+- **Kamal deployment** configuration included

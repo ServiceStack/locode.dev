@@ -76,8 +76,7 @@ export default function HomePage() {
                 <svg className="w-5 h-5 ml-2 -mr-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
               </Link>
               <Link
-                href="https://github.com/NetCoreTemplates"
-                target="_blank"
+                href="/docs/templates"
                 className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-transparent border-2 border-slate-600 hover:border-cyan-400/50 rounded-full hover:bg-slate-800 hover:text-cyan-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-600 shadow-sm"
               >
                 Explore Templates
