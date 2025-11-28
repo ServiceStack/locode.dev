@@ -1,0 +1,49 @@
+---
+title: Next.js Static
+description: The next-static template for Vibe Coding
+---
+
+# Next.js Static Template
+
+The `next-static` template is designed for building high-performance, static websites using Next.js and ServiceStack. It combines the SEO benefits of Static Site Generation (SSG) with the dynamic capabilities of a .NET backend.
+
+## Features
+
+- **Next.js SSG**: Pre-render pages at build time for blazing fast load speeds.
+- **ServiceStack Backend**: Full .NET 8 Web API with AutoQuery, Auth, and more.
+- **Tailwind CSS**: Rapid styling with utility classes.
+- **TypeScript**: End-to-end type safety.
+- **Docker Support**: Ready for deployment with Docker and Kamal.
+
+## Project Structure
+
+The project is organized into a clean monorepo structure:
+
+- `MyApp/`: The ASP.NET Core backend.
+- `MyApp.Client/`: The Next.js frontend application.
+- `MyApp.ServiceModel/`: Shared DTOs.
+- `MyApp.ServiceInterface/`: Service implementations.
+
+## Getting Started
+
+To create a new project with this template:
+
+```bash
+x new next-static ProjectName
+```
+
+### Development
+
+Run the following command to start both the backend and frontend in development mode:
+
+```bash
+dotnet watch
+```
+
+This will launch the .NET API and the Next.js dev server, with proxying configured automatically.
+
+## Deployment
+
+The template includes GitHub Actions for building and deploying your application using Kamal. It produces a single Docker image containing both the .NET backend and the static frontend assets.
+
+[View Source on GitHub](https://github.com/NetCoreTemplates/next-static)

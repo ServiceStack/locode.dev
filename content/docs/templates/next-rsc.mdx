@@ -1,0 +1,45 @@
+---
+title: Next.js RSC
+description: The next-rsc template for Vibe Coding
+---
+
+# Next.js RSC Template
+
+The `next-rsc` template leverages React Server Components (RSC) to bring the power of the server to your React components. It's the cutting edge of React development, integrated seamlessly with ServiceStack.
+
+## Features
+
+- **React Server Components**: Fetch data directly in your components on the server.
+- **Next.js App Router**: The latest routing paradigm from Next.js.
+- **ServiceStack Integration**: Call your .NET services directly from Server Components.
+- **Hybrid Rendering**: Mix server and client components for the best of both worlds.
+
+## Why RSC?
+
+React Server Components allow you to keep sensitive logic and large dependencies on the server, sending only the necessary HTML and minimal JavaScript to the client. This results in:
+
+- **Smaller Bundle Sizes**: Less JS to download and parse.
+- **Faster First Contentful Paint (FCP)**: Content is rendered on the server.
+- **Simplified Data Fetching**: No need for `useEffect` or complex state management for initial data.
+
+## Getting Started
+
+Generate a new project:
+
+```bash
+x new next-rsc ProjectName
+```
+
+### Development
+
+As with other templates, use `dotnet watch` to start the unified development experience.
+
+```bash
+dotnet watch
+```
+
+## Learn More
+
+This template is perfect for developers who want to stay ahead of the curve and utilize the latest React features while maintaining a robust .NET backend.
+
+[View Source on GitHub](https://github.com/NetCoreTemplates/next-rsc)

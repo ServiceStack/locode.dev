@@ -1,0 +1,46 @@
+---
+title: React Static
+description: The react-static template for Vibe Coding
+---
+
+# React Static Template
+
+The `react-static` template offers a classic Single Page Application (SPA) experience, optimized for productivity and simplicity. It uses Vite for fast builds and hot module replacement.
+
+## Features
+
+- **Vite**: Lightning-fast dev server and bundler.
+- **React SPA**: Client-side routing and rendering.
+- **ServiceStack Backend**: Robust .NET 8 API.
+- **Tailwind CSS**: Modern styling.
+- **TypeScript**: Typed DTOs and components.
+
+## Ideal Use Cases
+
+- **Dashboards**: Admin panels and internal tools.
+- **SaaS Applications**: Rich, interactive web apps.
+- **Mobile Wrappers**: Apps that need to be wrapped for mobile stores.
+
+## Getting Started
+
+Create a new project:
+
+```bash
+x new react-static ProjectName
+```
+
+### Development
+
+Start the development environment:
+
+```bash
+dotnet watch
+```
+
+This command spins up the ASP.NET Core backend and the Vite dev server.
+
+## Architecture
+
+In production, the React app is built into static files and served directly by the ASP.NET Core Kestrel server, simplifying deployment to a single binary or container.
+
+[View Source on GitHub](https://github.com/NetCoreTemplates/react-static)
