@@ -4,15 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { CopyBlock } from '@/app/components/copy-block';
+import ComponentGallery from '@/app/components/component-gallery';
 
 export default function HomePage() {
   const [diagramMode, setDiagramMode] = useState<'Production' | 'Development'>('Production');
 
   return (
     <main className="flex flex-col min-h-[calc(100vh-4rem)]">
-
-
-
       {/* Hero Section - Dark Theme */}
       <section className="relative w-full bg-slate-950 border-b border-white/10 overflow-hidden">
 
@@ -322,16 +320,176 @@ export default function HomePage() {
             />
           </div>
 
+        </div>
+      </div>
+
+      {/* React Component Gallery Divider - Full Width Dark Section */}
+      <section className="relative w-full bg-slate-950 border-y border-white/10 overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <svg className="h-full w-full" aria-hidden="true">
+            <defs>
+              <pattern id="featured-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M0 40L40 0H20L0 20M40 40V20L20 40" stroke="#0ea5e9" strokeWidth="1" fill="none" opacity="0.1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#featured-grid)" />
+          </svg>
+        </div>
+
+        <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-blue-600/20 blur-[80px] pointer-events-none"></div>
+        <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-cyan-500/10 blur-[80px] pointer-events-none"></div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 py-16 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-sm font-medium text-cyan-300 mb-6">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+            @servicestack/react
+          </div>
+
+          <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6">
+            React Component Gallery
+          </h2>
+
+          <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
+            @servicestack/react bridges the gap between your backend and frontend, delivering 
+            production-grade React applications with minimal code and maximum capability. 
+            With API-enabled validation bound forms you can focus on building features, not wiring forms.
+          </p>
+        </div>
+      </section>
+
+      <div className="flex-1 w-full bg-background text-foreground">
+        <div className="max-w-6xl mx-auto px-4 space-y-24">
+
+          <ReactComponentGallery />
+
           <PricingCallout />
         </div>
       </div>
+
     </main>
   );
 }
 
+function ReactComponentGallery() {
+  return (
+      <div className="mt-8 prose dark:prose-invert max-w-none">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose mb-12">
+          <Link href="https://react.servicestack.net/gallery/autoquerygrid" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">AutoQueryGrid</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Powerful data grid with built-in querying, filtering, and sorting capabilities.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/datagrid" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">DataGrid</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Flexible data grid component for displaying collections with custom rendering.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/autoform" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Auto Forms</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Automatically generated forms from your ServiceStack DTOs with validation.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/form-inputs" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Form Inputs</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Rich collection of form input components with built-in validation and styling.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/alerts" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Alerts</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Alert and notification components for displaying messages to users.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/modals" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Modals</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Modal dialogs and slide-over panels for focused user interactions.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/navigation" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Navigation</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Navigation components including Tabs, Breadcrumbs, NavList, and Buttons.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/formats" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Formats</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              PreviewFormat component for rendering data in different formats like currency, bytes, icons, and links.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/fileinput" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">FileInput</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              File upload component with support for single and multiple files, drag & drop, and managed uploads.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/taginput" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">TagInput</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Tag input component for managing multiple values with autocomplete and validation.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/combobox" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Combobox</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Searchable dropdown component with support for objects, key-value pairs, and custom rendering.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/autocomplete" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Autocomplete</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Autocomplete input with single/multiple selection and custom item rendering.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/custom-autoforms" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Custom Auto Forms</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Learn how to create custom AutoQuery implementations for complex scenarios.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/markdown" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Markdown Editor</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Rich markdown editor with toolbar, keyboard shortcuts, and GitHub Flavored Markdown support.
+            </p>
+          </Link>
+
+          <Link href="https://react.servicestack.net/gallery/custom-inputs" className="block p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-indigo-500 dark:hover:border-indigo-500 transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Custom Inputs</h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Create custom input components that integrate seamlessly with AutoForm.
+            </p>
+          </Link>
+        </div>
+      </div>
+  )
+}
+
 function PricingCallout() {
   return (
-    <div className="relative max-w-4xl mx-auto mt-60 rounded-3xl overflow-hidden bg-slate-950 border border-white/10 shadow-2xl">
+    <div className="relative max-w-4xl mx-auto mt-60 mb-32 rounded-3xl overflow-hidden bg-slate-950 border border-white/10 shadow-2xl">
       {/* Background Effects */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg className="h-full w-full" aria-hidden="true">
