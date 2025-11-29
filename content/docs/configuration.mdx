@@ -1,0 +1,177 @@
+---
+title: Configuration
+description: Configuration of .NET React template features
+---
+
+## Configuration
+
+### Key Configuration Files
+
+- **MyApp/appsettings.json** - Application configuration
+- **MyApp.Client/next.config.mjs** - Next.js configuration (for Next.js templates)
+- **MyApp.Client/vite.config.ts** - Vite configuration (for Vite templates)
+- **MyApp.Client/styles/index.css** - Tailwind CSS configuration
+- **config/deploy.yml** - Kamal deployment settings
+
+## App Settings
+
+Configure in `appsettings.json` or environment:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "DataSource=App_Data/app.db;Cache=Shared"
+  },
+  "SmtpConfig": {
+    "Host": "smtp.example.com",
+    "Port": 587,
+    "FromEmail": "noreply@example.com",
+    "FromName": "MyApp"
+  },
+  "AppConfig": {
+  }
+}
+```
+
+### Enable SMTP to Send Identity Auth Emails
+
+Update **SmtpConfig** in `appsettings.json` with your SMTP settings.
+
+In `Program.cs`, uncomment:
+
+```csharp
+services.AddSingleton<IEmailSender<ApplicationUser>, EmailSender>();
+```
+
+### App Settings Secrets
+
+Instead of polluting each GitHub Reposity with multiple App-specific GitHub Action Secrets, you can save all your secrets in a single `APPSETTINGS_PATCH` GitHub Action Secret to patch `appsettings.json` with environment-specific configuration using [JSON Patch](https://jsonpatch.com). E.g:
+
+```json
+[
+    {
+        "op":"replace",
+        "path":"/ConnectionStrings/DefaultConnection",
+        "value":"Server=service-postgres;Port=5432;User Id=dbuser;Password=dbpass;Database=dbname;Pooling=true;"
+    },
+    { "op":"add", "path":"/SmtpConfig", "value":{
+        "UserName": "SmptUser",
+        "Password": "SmptPass",
+        "Host": "email-smtp.us-east-1.amazonaws.com",
+        "Port": 587,
+        "From": "noreply@example.org",
+        "FromName": "MyApp",
+        "Bcc": "copy@example.org"
+      } 
+    },
+    { "op":"add", "path":"/Admins", "value": ["admin1@email.com","admin2@email.com"] },
+    { "op":"add", "path":"/CorsFeature/allowOriginWhitelist/-", "value":"https://servicestack.net" }
+]
+```
+
+### SMTP Email
+
+Enable email sending by uncommenting in `Program.cs`:
+
+```csharp
+services.AddSingleton<IEmailSender<ApplicationUser>, EmailSender>();
+```
+
+## Upgrading to Enterprise Database
+
+To switch from SQLite to PostgreSQL/SQL Server/MySQL:
+
+1. Install preferred RDBMS (ef-postgres, ef-mysql, ef-sqlserver), e.g:
+
+```bash
+npx add-in ef-postgres
+```
+
+2. Install `db-identity` to use RDBMS `DatabaseJobsFeature` for background jobs and `DbRequestLogger` for Request Logs:
+
+```bash
+npx add-in db-identity
+```
+
+### App Settings Secrets
+
+You could register any App-specifc secrets here, although our preference is instead of polluting each 
+GitHub Reposity with multiple App-specific GitHub Action Secrets, you can save all your secrets in a single 
+`APPSETTINGS_PATCH` GitHub Action Secret to patch `appsettings.json` with environment-specific configuration 
+using [JSON Patch](https://jsonpatch.com). E.g:
+
+```bash
+# JSON Patch to apply to appsettings.json:
+gh secret set APPSETTINGS_PATCH [json-patch]
+```
+
+JSON Patch example:
+
+```json
+[
+    {
+        "op":"replace",
+        "path":"/ConnectionStrings/DefaultConnection",
+        "value":"Server=service-postgres;Port=5432;User Id=dbuser;Password=dbpass;Database=dbname"
+    },
+    { "op":"add", "path":"/SmtpConfig", "value":{
+        "UserName": "SmptUser",
+        "Password": "SmptPass",
+        "Host": "email-smtp.us-east-1.amazonaws.com",
+        "Port": 587,
+        "From": "noreply@example.org",
+        "FromName": "MyApp",
+        "Bcc": "copy@example.org"
+      } 
+    },
+    { "op":"add", "path":"/Admins", "value": ["admin1@email.com","admin2@email.com"] },
+    { "op":"add", "path":"/CorsFeature/allowOriginWhitelist/-", "value":"https://servicestack.net" }
+]
+```
+
+### Kamal Accessories
+
+[Kamal Accessories](https://kamal-deploy.org/docs/commands/accessory/) allow you to run stateful services (like Databases, Redis, etc) on the same server as your application. This is a cost-effective way to host small-to-medium applications on a single server.
+
+You can define accessories in your `config/deploy.yml`. Here is an example of adding a local PostgreSQL database:
+
+```yaml
+service: acme
+# ...
+
+accessories:
+  postgres:
+    image: postgres
+    # IP address of server to deploy accessory to. (e.g. 100.100.100.100)
+    host: <%= ENV['KAMAL_DEPLOY_IP'] %>
+    # Expose port 5432 to the host (optional, for external access)
+    # port: "5432:5432"
+    env:
+      clear:
+        # Database username and database name
+        POSTGRES_USER: app
+        POSTGRES_DB: app_db
+        # Persist data to a volume
+        PGDATA: /var/lib/postgresql/data
+      # secrets from .env or GitHub Secrets
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      # Mount host directories to container for persistence
+      - /opt/docker/acme/postgres:/var/lib/postgresql/data
+      # Optional: Init scripts
+      - /opt/docker/acme/initdb.d:/docker-entrypoint-initdb.d
+```
+
+### Referencing Accessories
+
+When your application runs in Docker on the same server, you can reference the accessory using the Docker service name. 
+
+For Kamal, the service name follows the pattern `<app-service>-<accessory-name>`.
+For example, if your service is named `acme` and accessory is `postgres`, the hostname will be `acme-postgres`.
+
+**Connection String Example:**
+
+```
+Server=acme-postgres;Port=5432;User Id=app;Password=...;Database=app_db;
+```

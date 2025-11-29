@@ -3,9 +3,10 @@
         "index",
         "features",
         "templates",
-        "vibe-coding",
         "---Learn---",
+        "vibe-coding",
         "autoquery",
+        "configuration",
         "deployments"
     ]
 }
