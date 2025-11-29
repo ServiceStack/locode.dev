@@ -1,0 +1,9 @@
+{
+    "title": "AutoQuery",
+    "pages": [
+        "querying",
+        "crud",
+        "dev-workflow"
+    ],
+    "defaultOpen": true
+}

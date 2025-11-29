@@ -1,0 +1,215 @@
+---
+title: Dev Workflow
+description: Rapid development workflow for creating AutoQuery CRUD APIs using TypeScript Data Models to generate C# APIs and DB Migrations
+---
+
+For Rapid Development of [AutoQuery CRUD APIs](/docs/autoquery/crud) all React Templates include a `Bookings.d.ts`
+example to showcase how to use [TypeScript Data Models](https://docs.servicestack.net/autoquery/okai-models) 
+to generate C# AutoQuery APIs and DB Migrations.
+
+## Typical Workflow
+
+### Create a new Table
+
+Create a new Table use `init <Table>`, e.g:
+
+```bash
+npx okai init Table
+```
+
+This will generate an empty `MyApp.ServiceModel/<Table>.d.ts` file along with stub AutoQuery APIs and 
+DB Migration implementations. 
+
+### Use AI to generate the TypeScript Data Model
+
+Or to get you started quickly you can also use AI to generate the initial TypeScript Data Model with:
+
+```bash
+npx okai "Table to store Customer Stripe Subscriptions"
+```
+
+This launches a TUI that invokes ServiceStack's okai API to fire multiple concurrent requests to frontier cloud 
+and OSS models to generate the TypeScript Data Models required to implement this feature. 
+You'll be able to browse and choose which of the AI Models you prefer which you can accept by pressing `a` 
+to `(a) accept`. These are the data models [Claude Sonnet 4.5 generated](https://servicestack.net/text-to-blazor?id=1764337230546)
+generated for this prompt:
+
+```ts
+/// <reference path="./api.d.ts" />
+export type Config = {
+  prompt:    " Manage Customer Stripe Subscriptions"
+  api:       "~/MyApp.ServiceModel/CustomerSubscriptions.cs"
+  migration: "~/MyApp/Migrations/Migration1001.cs"
+}
+
+// Billing interval for subscription plans
+export enum BillingInterval {
+  Day,
+  Week,
+  Month,
+  Year,
+}
+
+// Status of a customer subscription
+export enum SubscriptionStatus {
+  Incomplete,
+  IncompleteExpired,
+  Trialing,
+  Active,
+  PastDue,
+  Canceled,
+  Unpaid,
+  Paused,
+}
+
+// Type of payment method
+export enum PaymentMethodType {
+  Card,
+  BankAccount,
+  SepaDebit,
+  Ideal,
+  Other,
+}
+
+// Status of an invoice
+export enum InvoiceStatus {
+  Draft,
+  Open,
+  Paid,
+  Void,
+  Uncollectible,
+}
+
+// Represents a customer in the system
+export class Customer extends AuditBase {
+  id: number
+  email: string
+  firstName: string
+  lastName: string
+  stripeCustomerId?: string
+}
+
+// Represents a subscription plan available for purchase
+export class SubscriptionPlan extends AuditBase {
+  id: number
+  name: string
+  description: string
+  stripePriceId: string
+  stripeProductId: string
+  amount: number
+  currency: string
+  interval: BillingInterval
+  intervalCount: number
+  trialPeriodDays?: number
+  isActive: boolean
+  features: string[]
+}
+
+// Represents a customer's subscription
+export class CustomerSubscription extends AuditBase {
+  id: number
+  customerId: string
+  subscriptionPlanId: string
+  stripeSubscriptionId: string
+  status: SubscriptionStatus
+  currentPeriodStart: Date
+  currentPeriodEnd: Date
+  cancelAtPeriodEnd: boolean
+  canceledAt?: Date
+  trialStart?: Date
+  trialEnd?: Date
+}
+
+// Represents a payment method associated with a customer
+export class PaymentMethod extends AuditBase {
+  id: number
+  customerId: string
+  stripePaymentMethodId: string
+  type: PaymentMethodType
+  isDefault: boolean
+  last4?: string
+  brand?: string
+  expiryMonth?: number
+  expiryYear?: number
+}
+
+// Represents an invoice for a subscription
+export class Invoice extends AuditBase {
+  id: number
+  customerSubscriptionId: string
+  customerId: string
+  stripeInvoiceId: string
+  amount: number
+  currency: string
+  status: InvoiceStatus
+  invoiceNumber?: string
+  invoicePdf?: string
+  dueDate?: Date
+  paidAt?: Date
+}
+
+// Represents a webhook event from Stripe
+export class StripeWebhookEvent extends AuditBase {
+  id: number
+  stripeEventId: string
+  eventType: string
+  payload: Record<string, any>
+  processed: boolean
+  processedAt?: Date
+  error?: string
+}
+```
+
+If your happy to use the data-models as-is you can run the DB Migrations to create these RDBMS tables:
+
+```bash
+npm run migrate
+```
+
+Otherwise you can make whatever customizations you want to the `CustomerSubscriptions.d.ts` data models
+then re-run the `okai` tool to re-generate the AutoQuery APIs and DB Migrations before running the migration.
+
+```bash
+npx okai CustomerSubscriptions.d.ts
+npm run migrate
+```
+
+### Regenerate AutoQuery APIs and DB Migrations
+
+After modifying the TypeScript Data Model to include your desired fields, re-run the `okai` tool to re-generate 
+the AutoQuery APIs and DB Migrations:
+
+```bash
+npx okai Table.d.ts
+```
+
+<Tip>Same command can be run **anywhere** within your Solution</Tip>
+
+After you've finished modifying your `Table.d.ts` Data Model you can run DB Migrations to run the DB Migration 
+and create your RDBMS Table:
+
+```bash
+npm run migrate
+```
+
+### Making changes after first migration
+
+If you want to make further changes to your Data Model, you can re-run the `okai` tool to update the AutoQuery APIs and DB Migrations, then run the `rerun:last` npm script to drop and re-run the last migration:
+
+```bash
+npm run rerun:last
+```
+
+### Removing a Data Model and all generated code
+
+If you changed your mind and want to get rid of the RDBMS Table you can revert the last migration:
+
+```bash
+npm run revert:last
+```
+
+Which will drop the table and then you can get rid of the AutoQuery APIs, DB Migrations and TypeScript Data model with:
+
+```bash
+npx okai rm Table.d.ts
+```

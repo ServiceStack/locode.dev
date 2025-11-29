@@ -1,4 +1,12 @@
 {
     "title": "Minimal Templates",
+    "pages": [
+        "react-static",
+        "next-static",
+        "next-rsc",
+        "---Full Featured Templates---",
+        "react-spa",
+        "nextjs"
+    ],
     "defaultOpen": true
 }
